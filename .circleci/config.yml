@@ -6,9 +6,26 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
+        environment:
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          #バージョン指定する
+          BUNDLER_VERSION: 2.1.4
     executor: ruby/default
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - my-app-bundle-v1-{{ checksum "Gemfile.lock" }}
+            - my-app-bundle-v1-
+      - run:
+          name: Bundler install
+          command: |
+            gem update --system
+            gem install bundler -v 2.1.4
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
       - run:
           name: Which bundler?
           command: bundle -v
