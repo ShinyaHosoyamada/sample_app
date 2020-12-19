@@ -609,3 +609,16 @@ Processing by HomeController#about as HTML
 Completed 200 OK in 18ms (Views: 13.1ms | ActiveRecord: 0.3ms | Allocations: 4830)
 
 
+Started GET "/about" for ::1 at 2020-12-19 18:08:00 +0900
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#about as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering home/about.html.erb within layouts/application
+  Rendered home/about.html.erb within layouts/application (Duration: 7.5ms | Allocations: 291)
+  Rendered layout layouts/application.html.erb (Duration: 88.1ms | Allocations: 8974)
+Completed 200 OK in 143ms (Views: 102.6ms | ActiveRecord: 1.6ms | Allocations: 14390)
+
+
